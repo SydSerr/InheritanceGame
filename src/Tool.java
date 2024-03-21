@@ -1,2 +1,2 @@
-public class Tool extends Inventory{
+public class Tool extends Inventory {
 }
