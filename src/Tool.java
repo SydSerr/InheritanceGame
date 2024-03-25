@@ -21,7 +21,6 @@ public class Tool extends Item {
         uses.add(newUse);
     }
 
-    //Capabilities is a class we will cycle through to check for matches. All tools you have will have their capabilities added to the ArrayList.
-    //Some tools will have overlap- a crowbar could open a locked door but so could an appropriate key. This static ArrayList will cover for that and allow for easy polling.
-    private static ArrayList<String> capabilities;
+
+
 }
