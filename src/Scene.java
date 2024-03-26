@@ -94,6 +94,7 @@ public class Scene {
     public void setStoryText(String storyText) {
         this.storyText = storyText;
     }
+
     public String getTransition() {
         return transition;
     }

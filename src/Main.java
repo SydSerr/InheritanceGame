@@ -15,25 +15,40 @@ public class Main {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 
         //General format for creating a new scene: Create scene. Give it story text. Give it choices. Give it other optional features
-        //First room, and example setup.
+
+        //Declaring all the scene objects
         Scene strangeRoom1 = new Scene();
+        Scene investigation = new Scene();
+        Scene kitchen = new Scene();
+        Scene garage = new Scene();
         Key bluekey = new Key("blue");
-        strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… You try the door but it's locked. Maybe there’s a key nearby… Check the desk or check the dresser?");
-        strangeRoom1.addChoice(new Choice("Check the desk", "gainItem"));
-        strangeRoom1.addChoice(new Choice("Check the dresser", "return"));
-        strangeRoom1.addChoice(new Choice("Check the door", "return", "nextScene1"));
+
+        //First room, and example setup.
+        strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
+        strangeRoom1.setStoryTextRepeat("You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around");
+        strangeRoom1.addChoice(new Choice("Check the desk", "You find a blue key in the drawer.", "gainItem"));
+        strangeRoom1.addChoice(new Choice("Check the dresser", "There’s nothing but dust bunnies in here... Go back", "return"));
+        strangeRoom1.addChoice(new Choice("Check the door", "It’s definitely locked", "return", "nextScene1"));
         strangeRoom1.setGainedItem(bluekey);
-        Scene hallway = new Scene();
-        hallway.setStoryText("The key unlocks the door. You decide to look around for a way out");
-        hallway.setGainedItem(bluekey);
+
+        //
+        investigation.setStoryText("You decide to look elsewhere for a way out");
+        investigation.setStoryTextRepeat("The key unlocks the door. You decide to look around for a way out");
+        investigation.addChoice(new Choice("Check the front door", "return"));
+        investigation.addChoice(new Choice("Check the front door", "return"));
+        investigation.addChoice(new Choice("Check the kitchen", "nextScene1"));
+        investigation.addNextScene(kitchen);
+        investigation.addChoice(new Choice("Check the garage", "nextScene2"));
+        investigation.addNextScene(garage);
 
 
 
         //Adding all the scenes that need to be accessed
-        strangeRoom1.addNextScene(hallway);
+        strangeRoom1.addNextScene(investigation);
 
         //begin
         strangeRoom1.printScene();
+        //Runs the play method of the output scene.
         strangeRoom1.choice(scanner.nextLine()).play();
 
 
