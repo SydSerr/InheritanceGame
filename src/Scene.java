@@ -6,6 +6,7 @@ public class Scene {
     //Scene will hold the storyline given to you along with the changes that should be made to your inventory
     private String storyText;
     private String storyTextRepeat;
+    private boolean repeat;
     private final ArrayList<Choice> choices = new ArrayList<>();
     private final ArrayList<Scene> nextScenes = new ArrayList<>();
     private static final Scanner scanner = new Scanner(System.in);
@@ -18,7 +19,13 @@ public class Scene {
     public Scene(){
     }
     public void printScene(){
-        System.out.println(storyText);
+        if(!repeat) {
+            System.out.println(storyText);
+        }
+        else{
+            System.out.println(storyTextRepeat);
+        }
+        repeat = true;
         System.out.println("You can:");
         for(int i = 0; i <choices.size(); i++){
             System.out.println(i+1+". " + choices.get(i).getChoiceDescription());
@@ -30,7 +37,6 @@ public class Scene {
     public Scene choice(int userChoice){
         //Cycle through all choices to check if what the user typed matches an option
         for(int i = 0; i< choices.size(); i++) {//Cycle through every choice
-            
             //Go through all the indexes in 'choices' until you find which index the user typed in.
             if (userChoice == i+1) {
                 //Use this index to find the choice the user typed, and use our capabilities to determine what outcome will happen. Call that outcome pickedChoiceOutcome.
