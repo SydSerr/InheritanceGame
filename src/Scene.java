@@ -51,6 +51,11 @@ public class Scene {
                     case "nextScene2" -> {
                         return nextScenes.get(1);
                     }
+                    case "ending" -> {
+                        System.out.println("You Escaped! Congrats");
+                        System.exit(0);
+                        return null;
+                    }
                 }
 
             }
@@ -66,7 +71,7 @@ public class Scene {
         //Once you reach the correct index, name the choice at that index "pickedChoice"
         Choice pickedChoice = choices.get(i);
         //However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.
-        //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilites, it happens.
+        //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilities, it happens.
         //However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.
         Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
         String requirement = "a";
@@ -83,8 +88,6 @@ public class Scene {
     }
 
     //Getters and setters
-
-
     public String getStoryTextRepeat() {
         return storyTextRepeat;
     }

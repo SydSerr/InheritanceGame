@@ -34,11 +34,13 @@ public class Main {
         //
         investigation.setStoryText("The key unlocks the door. You need to find a way out. Maybe look around?");
         investigation.setStoryTextRepeat("Keep Looking Around");
-//        investigation.addChoice();
-//        investigation.addChoice();
-//        investigation.addChoice();
-//        investigation.addChoice();
-//        investigation.addChoice();
+        investigation.addChoice(new Choice("Check Front Door",new Outcome("The front door is jammed shut. There's no real way to open it. Find another way out.","return")));
+        investigation.addChoice(new Choice("Check Back Door",new Outcome("It looks like it’s locked, bolted and boarded up. Maybe there’s tools around the house that can help unlock the door…","return"), new Outcome ("You use the red key, wrench and crowbar to open the door and escape","ending")));
+        investigation.addChoice(new Choice("Check the Kitchen", new Outcome("You walk over to the kitchen","nextScene1")));
+        investigation.addNextScene(kitchen);
+        investigation.addChoice(new Choice("Check the Garage", new Outcome("")));
+        investigation.addChoice(new Choice("Check window", new Outcome("The window could probably break if you hit it with something.","return"), new Outcome ("You break the window with the wrench, but it's too small to fit through. You need to find another way out.","return")));
+
 
         //add scenes and add scanner to give numbers to choices and user inputs number to select
 

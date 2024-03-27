@@ -7,7 +7,6 @@ public class Choice {
     private ArrayList<Outcome> outcomes = new ArrayList<>();
 
 
-
     public Choice(String choiceDescription, Outcome outcome) {
         this.choiceDescription = choiceDescription;
         this.outcomes.add(outcome);
