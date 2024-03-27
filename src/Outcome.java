@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Outcome {
     //Printed to the user after a choice is picked.
     private String description;
@@ -5,7 +7,7 @@ public class Outcome {
     private String event;
     private Item gainedItem;
     private Item usedItem;
-    private String requirement = "none";
+    private ArrayList<String> requirement = new ArrayList<>();
 
     //Overloaded constructors for different types of outcomes: some with requirements, some with gaineditems, some both
     public Outcome(String description, String event, String requirement) {
@@ -17,7 +19,7 @@ public class Outcome {
         this.description = description;
         this.event = event;
     }
-    public Outcome(String description, String event, Item gainedItem, String requirement) {
+    public Outcome(String description, String event, Item gainedItem, String requirement,String requirement2, String requirement3) {
         this.description = description;
         this.event = event;
         this.requirement = requirement;

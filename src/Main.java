@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Main {
 
-
     //Inventory: can be accessed anywhere, and there is only one of them.
     public static ArrayList<Item> inventory = new ArrayList<>();
 
@@ -23,36 +22,29 @@ public class Main {
         Scene garage = new Scene();
         Key bluekey = new Key("blue");
         Key redkey = new Key("red");
+        Tool wrench = new Tool("Wrench");
+        Tool crowbar = new Tool("Crowbar");
 
         //First room, and example setup.
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around");
         strangeRoom1.addChoice(new Choice("Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey)));
         strangeRoom1.addChoice(new Choice("Check the dresser", new Outcome("There’s nothing but dust bunnies in here... Go back", "return")));
-        strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1" )));
+        strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey" )));
 
-        //
+        //2nd scene connected with choices and outcomes
         investigation.setStoryText("The key unlocks the door. You need to find a way out. Maybe look around?");
         investigation.setStoryTextRepeat("Keep Looking Around");
         investigation.addChoice(new Choice("Check Front Door",new Outcome("The front door is jammed shut. There's no real way to open it. Find another way out.","return")));
-        investigation.addChoice(new Choice("Check Back Door",new Outcome("It looks like it’s locked, bolted and boarded up. Maybe there’s tools around the house that can help unlock the door…","return"), new Outcome ("You use the red key, wrench and crowbar to open the door and escape","ending")));
+        investigation.addChoice(new Choice("Check Back Door",new Outcome("It looks like it’s locked, bolted and boarded up. Maybe there’s tools around the house that can help unlock the door…","return"), new Outcome ("You use the red key, wrench and crowbar to open the door and escape","ending","redkey")));
         investigation.addChoice(new Choice("Check the Kitchen", new Outcome("You walk over to the kitchen","nextScene1")));
         investigation.addNextScene(kitchen);
-        investigation.addChoice(new Choice("Check the Garage", new Outcome("")));
+        investigation.addChoice(new Choice("Check the Garage", new Outcome("You walk into the garage.","nextScene2")));
+        investigation.addNextScene(garage);
         investigation.addChoice(new Choice("Check window", new Outcome("The window could probably break if you hit it with something.","return"), new Outcome ("You break the window with the wrench, but it's too small to fit through. You need to find another way out.","return")));
 
 
-        //add scenes and add scanner to give numbers to choices and user inputs number to select
 
-        //
-//        investigation.setStoryText("You decide to look elsewhere for a way out");
-//        investigation.setStoryTextRepeat("The key unlocks the door. You decide to look around for a way out");
-//        investigation.addChoice(new Choice("Check the front door", "return"));
-//        investigation.addChoice(new Choice("Check the back door", "return"));
-//        investigation.addChoice(new Choice("Check the kitchen", "nextScene1"));
-//        investigation.addNextScene(kitchen);
-//        investigation.addChoice(new Choice("Check the garage", "nextScene2"));
-//        investigation.addNextScene(garage);
 
 
 

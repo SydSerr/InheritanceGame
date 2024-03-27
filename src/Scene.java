@@ -74,7 +74,6 @@ public class Scene {
         //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilities, it happens.
         //However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.
         Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
-        String requirement = "a";
 
         //These two loops cycle through all of Main.capabilities, a list of what you can do, and through the outcome requirements.
         for(int j = 0; j < Main.capabilities.size(); j++) {
