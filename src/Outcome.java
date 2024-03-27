@@ -7,6 +7,7 @@ public class Outcome {
     private Item usedItem;
     private String requirement = "none";
 
+    //Overloaded constructors for different types of outcomes: some with requirements, some with gaineditems, some both
     public Outcome(String description, String event, String requirement) {
         this.description = description;
         this.event = event;
@@ -15,6 +16,17 @@ public class Outcome {
     public Outcome(String description, String event) {
         this.description = description;
         this.event = event;
+    }
+    public Outcome(String description, String event, Item gainedItem, String requirement) {
+        this.description = description;
+        this.event = event;
+        this.requirement = requirement;
+        this.gainedItem = gainedItem;
+    }
+    public Outcome(String description, String event, Item gainedItem) {
+        this.description = description;
+        this.event = event;
+        this.gainedItem = gainedItem;
     }
 
     public String getDescription() {

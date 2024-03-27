@@ -4,13 +4,13 @@ public class Choice {
     //Text description for the user to read when deciding what to do
     private String choiceDescription;
     //There's multiple outcomes. Via an if statement, we can decide which outcome is correct for this scenario.
-    private ArrayList<Outcome> outcomes;
+    private ArrayList<Outcome> outcomes = new ArrayList<>();
 
 
 
     public Choice(String choiceDescription, Outcome outcome) {
         this.choiceDescription = choiceDescription;
-        outcomes.add(outcome);
+        this.outcomes.add(outcome);
     }
     public Choice(String choiceDescription, Outcome outcome1, Outcome outcome2) {
         this.choiceDescription = choiceDescription;
@@ -54,5 +54,13 @@ public class Choice {
             return null;
         }
         return outcomes.get(index);
+    }
+
+    public ArrayList<Outcome> getOutcomes() {
+        return outcomes;
+    }
+
+    public void setOutcomes(ArrayList<Outcome> outcomes) {
+        this.outcomes = outcomes;
     }
 }
