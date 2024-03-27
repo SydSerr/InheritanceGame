@@ -26,16 +26,16 @@ public class Main {
         //First room, and example setup.
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around");
-        strangeRoom1.addChoice(new Choice("Check the desk", "You find a blue key in the drawer.", "gainItem"));
-        strangeRoom1.addChoice(new Choice("Check the dresser", "There’s nothing but dust bunnies in here... Go back", "return"));
-        strangeRoom1.addChoice(new Choice("Check the door", "It’s definitely locked", "return", "nextScene1"));
+        strangeRoom1.addChoice(new Choice("Check the desk", new Outcome("You find a blue key in the drawer.", "gainItem")));
+        strangeRoom1.addChoice(new Choice("Check the dresser", new Outcome("There’s nothing but dust bunnies in here... Go back", "return")));
+        strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1"));
         strangeRoom1.setGainedItem(bluekey);
 
         //
         investigation.setStoryText("You decide to look elsewhere for a way out");
         investigation.setStoryTextRepeat("The key unlocks the door. You decide to look around for a way out");
         investigation.addChoice(new Choice("Check the front door", "return"));
-        investigation.addChoice(new Choice("Check the front door", "return"));
+        investigation.addChoice(new Choice("Check the back door", "return"));
         investigation.addChoice(new Choice("Check the kitchen", "nextScene1"));
         investigation.addNextScene(kitchen);
         investigation.addChoice(new Choice("Check the garage", "nextScene2"));

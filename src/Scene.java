@@ -6,18 +6,9 @@ public class Scene {
     //Scene will hold the storyline given to you along with the changes that should be made to your inventory
     private String storyText;
     private String storyTextRepeat;
-    private String transition;
-    private Item gainedItem;
-    private Item usedItem;
     private final ArrayList<Choice> choices = new ArrayList<>();
     private final ArrayList<Scene> nextScenes = new ArrayList<>();
-    public Scene(String transition, Item gainedItem, Item usedItem) {
-        this.transition = transition;
-        this.gainedItem = gainedItem;
-        this.usedItem = usedItem;
-    }
     public Scene(){
-
     }
     public void printScene(){
         System.out.println(storyText);
