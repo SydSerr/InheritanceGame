@@ -5,7 +5,13 @@ public class Outcome {
     private String event;
     private Item gainedItem;
     private Item usedItem;
+    private String requirement = "none";
 
+    public Outcome(String description, String event, String requirement) {
+        this.description = description;
+        this.event = event;
+        this.requirement = requirement;
+    }
     public Outcome(String description, String event) {
         this.description = description;
         this.event = event;
@@ -25,6 +31,14 @@ public class Outcome {
 
     public void setEvent(String event) {
         this.event = event;
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
     }
 
     public Item getGainedItem() {

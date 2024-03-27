@@ -14,7 +14,7 @@ public class Scene {
         System.out.println(storyText);
         System.out.println("You can:");
         for(int i = 0; i < choices.size(); i++){
-            System.out.println(choices.get(i).);
+            System.out.println(choices.get(i).getChoiceDescription());
             if(i < choices.size()-1) {
                 System.out.println("or");
             }
@@ -26,23 +26,46 @@ public class Scene {
     public Scene choice(String userChoice){
         //Cycle through all choices to check if what the user typed matches an option
         for(int i = 0; i< choices.size(); i++) {//Cycle
+
             Choice pickedChoice = choices.get(i);//Get current choice of cycle
-            Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
-            //grabs
-            if (userChoice.equals(pickedChoice.getChoiceDescription())) {//Check if user input matches the current cycle's choice's description.
+
+
+            //
+            //REPLACE WITH 1. 2. 3. SYSTEM. DON'T DO USERCHOICE.EQUALS(PICKEDCHOICE). ALSO CHANGE USERCHOICE INSIDE OF THE MAIN TO BE AN INT.
+            //
+
+            //Then, compare the current cycle's choice matches the user's input
+            if (userChoice.equals(pickedChoice.getChoiceDescription())) {
                 //If it does match, get the outcome and do the appropriate thing, like giving an item.
-                if (pickedChoiceOutcome.getDescription().equals("gainItem")){
-                    Main.inventory.add(pickedChoiceOutcome.getGainedItem());
-                    return this;
+
+                //However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.
+                //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilites, it happens.
+                //However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.
+                Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
+                String requirement = "a";
+
+                for(int j = 0; j < Main.capabilities.size(); j++) {
+                    for (int k = 0; k < pickedChoice.get)
+                    if (pickedChoice.getOutcome(1).getRequirement() == Main.capabilities.get(j)) {
+                        pickedChoiceOutcome = pickedChoice.getOutcome(1);
+                    }
                 }
-                else if (pickedChoiceOutcome.getDescription().equals("return")){
-                    return this;
-                }
-                else if (pickedChoiceOutcome.getDescription().equals("nextScene1")){
-                    return nextScenes.get(0);
-                }
-                else if (pickedChoiceOutcome.getDescription().equals("nextScene2")){
-                    return nextScenes.get(1);
+
+                switch (pickedChoiceOutcome.getDescription()) {
+
+                    case "gainItem" -> {
+                        Main.inventory.add(pickedChoiceOutcome.getGainedItem());
+                        return this;
+                    }
+                    case "return" -> {
+                        return this;
+                    }
+                    case "nextScene1" -> {
+                        return nextScenes.get(0);
+                    }
+                    case "nextScene2" -> {
+                        return nextScenes.get(1);
+                    }
                 }
 
             }
