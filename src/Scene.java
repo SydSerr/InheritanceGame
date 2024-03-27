@@ -14,40 +14,37 @@ public class Scene {
         System.out.println(storyText);
         System.out.println("You can:");
         for(int i = 0; i < choices.size(); i++){
-            System.out.println(choices.get(i).getDescription());
+            System.out.println(choices.get(i).);
             if(i < choices.size()-1) {
                 System.out.println("or");
             }
         }
     }
-    //Will comment later
+    //Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.
+    //It decides this based on what the capabilities are.
+    //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
     public Scene choice(String userChoice){
         //Cycle through all choices to check if what the user typed matches an option
         for(int i = 0; i< choices.size(); i++) {//Cycle
             Choice pickedChoice = choices.get(i);//Get current choice of cycle
-            if (userChoice.equals(pickedChoice.getDescription())) {//Check if user input matches the current cycle's choice's description.
+            Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
+            //grabs
+            if (userChoice.equals(pickedChoice.getChoiceDescription())) {//Check if user input matches the current cycle's choice's description.
                 //If it does match, get the outcome and do the appropriate thing, like giving an item.
-                if (pickedChoice.getOutcome(i).equals("gainItem")){
-                    Main.inventory.add(gainedItem);
+                if (pickedChoiceOutcome.getDescription().equals("gainItem")){
+                    Main.inventory.add(pickedChoiceOutcome.getGainedItem().ge);
                     return this;
                 }
-                else if (pickedChoice.getOutcome(i).equals("return")){
+                else if (pickedChoiceOutcome.getDescription().equals("return")){
                     return this;
                 }
-                else if (pickedChoice.getOutcome(i).equals("nextScene1")){
+                else if (pickedChoiceOutcome.getDescription().equals("nextScene1")){
                     return nextScenes.get(0);
                 }
-                else if (pickedChoice.getOutcome(i).equals("nextScene2")){
+                else if (pickedChoiceOutcome.getDescription().equals("nextScene2")){
                     return nextScenes.get(1);
                 }
-                else if (pickedChoice.getOutcome(i).equals("nextScene3")){
-                    return nextScenes.get(2);
-                }
-                else if (pickedChoice.getOutcome(i).equals("die")){
-                    System.out.println("You Died");
-                    //end program immediately
-                    System.exit(0);
-                }
+
             }
         }
         //if it makes it out of this for loop, we need to make it so the user is told that that's not an option, and is given a chance to retype a choice. Remove the return null.
@@ -86,24 +83,7 @@ public class Scene {
         this.storyText = storyText;
     }
 
-    public String getTransition() {
-        return transition;
-    }
-    public void setTransition(String transition) {
-        this.transition = transition;
-    }
-    public Item getGainedItem() {
-        return gainedItem;
-    }
-    public void setGainedItem(Item gainedItem) {
-        this.gainedItem = gainedItem;
-    }
-    public Item getUsedItem() {
-        return usedItem;
-    }
-    public void setUsedItem(Item usedItem) {
-        this.usedItem = usedItem;
-    }
+
 
     public void play() {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object

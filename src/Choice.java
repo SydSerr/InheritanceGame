@@ -40,5 +40,18 @@ public class Choice {
         this.choiceDescription = choiceDescription;
     }
 
+    public void addOutcome(Outcome outcome) {
+        if (outcomes == null) {
+            outcomes = new ArrayList<>();
+        }
+        outcomes.add(outcome);
+    }
 
+    public Outcome getOutcome(int index) {
+        if (outcomes == null || index < 0 || index >= outcomes.size()) {
+            // Handle invalid index or empty list appropriately, e.g., throw exception or return null
+            return null;
+        }
+        return outcomes.get(index);
+    }
 }
