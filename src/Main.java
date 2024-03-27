@@ -22,6 +22,7 @@ public class Main {
         Scene kitchen = new Scene();
         Scene garage = new Scene();
         Key bluekey = new Key("blue");
+        Key redkey = new Key("red");
 
         //First room, and example setup.
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
@@ -30,6 +31,16 @@ public class Main {
         strangeRoom1.addChoice(new Choice("Check the dresser", new Outcome("There’s nothing but dust bunnies in here... Go back", "return")));
         strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1")));
 
+        //
+        investigation.setStoryText("The key unlocks the door. You need to find a way out. Maybe look around?");
+        investigation.setStoryTextRepeat("Keep Looking Around");
+        investigation.addChoice();
+        investigation.addChoice();
+        investigation.addChoice();
+        investigation.addChoice();
+        investigation.addChoice();
+
+        //add scenes and add scanner to give numbers to choices and user inputs number to select
 
         //
 //        investigation.setStoryText("You decide to look elsewhere for a way out");
@@ -45,6 +56,7 @@ public class Main {
 
         //Adding all the scenes that need to be accessed
         strangeRoom1.addNextScene(investigation);
+
 
         //begin
         strangeRoom1.printScene();
