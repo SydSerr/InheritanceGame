@@ -32,7 +32,7 @@ public class Scene {
             if (userChoice.equals(pickedChoice.getChoiceDescription())) {//Check if user input matches the current cycle's choice's description.
                 //If it does match, get the outcome and do the appropriate thing, like giving an item.
                 if (pickedChoiceOutcome.getDescription().equals("gainItem")){
-                    Main.inventory.add(pickedChoiceOutcome.getGainedItem().ge);
+                    Main.inventory.add(pickedChoiceOutcome.getGainedItem());
                     return this;
                 }
                 else if (pickedChoiceOutcome.getDescription().equals("return")){
