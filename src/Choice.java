@@ -22,6 +22,7 @@ public class Choice {
         outcomes.add(outcome1);
         outcomes.add(outcome2);
         outcomes.add(outcome2);
+        outcomes.add(outcome3);
     }
     public Choice(String choiceDescription, Outcome outcome1, Outcome outcome2, Outcome outcome3, Outcome outcome4) {
         this.choiceDescription = choiceDescription;
