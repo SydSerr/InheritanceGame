@@ -66,24 +66,13 @@ public class Outcome {
     public Item getUsedItem() {
         return usedItem;
     }
-
     public void setUsedItem(Item usedItem) {
         this.usedItem = usedItem;
     }
-
     public void setEvent(String event) {
         this.event = event;
     }
-
     public String getEvent() {
         return event;
     }
 }
-/* Stolen from old stuff
-//Text description for the user to read after they pick a choice
-    private String outcomeDescription;
-    private String outcomeDescriptionReturn;
-
-    //Can be die, return, gainItem, nextScene, or other stuff. Used on the backend; the user won't see this.
-    private ArrayList<String> outcomes;
- */
