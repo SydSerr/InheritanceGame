@@ -16,9 +16,6 @@ public class Scene {
         System.out.println("You can:");
         for(int i = 0; i < choices.size(); i++){
             System.out.println(choices.get(i).getChoiceDescription());
-            if(i < choices.size()-1) {
-                System.out.println("or");
-            }
         }
     }
     //Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.
