@@ -19,7 +19,7 @@ public class Main {
         Scene investigation = new Scene();
         Scene kitchen = new Scene();
         Scene garage = new Scene();
-        Scene ending = new Scene();
+
         Key bluekey = new Key("blue");
         Key redkey = new Key("red");
         Tool wrench = new Tool("wrench");
@@ -39,7 +39,6 @@ public class Main {
         investigation.addChoice(new Choice("1. Check Front Door",new Outcome("The front door is jammed shut. There's no real way to open it. Find another way out.","return")));
 
         investigation.addChoice(new Choice("2. Check Back Door",new Outcome("It looks like it’s locked, bolted and boarded up. Maybe there’s tools around the house that can help unlock the door…","return"), new Outcome ("You use the red key, wrench and crowbar to open the door and escape","ending","redkey","wrench","crowbar")));
-        investigation.addNextScene(ending);
         investigation.addChoice(new Choice("3. Check the Kitchen", new Outcome("You walk over to the kitchen","nextScene1")));
         investigation.addNextScene(kitchen);
         investigation.addChoice(new Choice("4. Check the Garage", new Outcome("You walk into the garage.","nextScene2")));
@@ -62,8 +61,6 @@ public class Main {
         garage.addChoice(new Choice("3. Leave the garage",new Outcome("You leave the garage","return")));
         garage.addNextScene(investigation);
 
-        //ending scene text
-        ending.setStoryText("Congratulations! You Escaped! Restart to play again!");
 
         //begin
         strangeRoom1.printScene();

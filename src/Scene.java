@@ -77,7 +77,8 @@ public class Scene {
                         return nextScenes.get(2);
                     }
                     case "ending" -> {
-                        return nextScenes.get(3);
+                        System.out.println("Congratulations! You Escaped! Restart to play again!");
+
                     }
                 }
             }
