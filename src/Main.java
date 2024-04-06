@@ -48,7 +48,7 @@ public class Main {
 
         //kitchen scene
         kitchen.setStoryText("The kitchen's a mess. Maybe there's something in this mess");
-        kitchen.setStoryTextRepeat("Keep looking around the kitchen");
+        kitchen.setStoryTextRepeat("Keep looking around the kitchen?");
         kitchen.addChoice(new Choice("1. Check the Fridge",new Outcome("There's nothing but empty containers","return")));
         kitchen.addChoice(new Choice("2. Check Under the Sink",new Outcome("It isn't opening. Maybe you could use something to pry it open","return"), new Outcome("You use the crowbar to pry open the cabinet door and find a red key.","gainItem",redkey,"crowbar")));
         kitchen.addChoice(new Choice( "3. Leave Kitchen",new Outcome("You leave the kitchen","nextScene1")));
@@ -56,7 +56,7 @@ public class Main {
 
         //garage scene
         garage.setStoryText("It's dusty. An old car lies untouched. It probably doesn't run anymore. Look around for tools");
-        garage.setStoryTextRepeat("Keep looking around for tools");
+        garage.setStoryTextRepeat("Keep looking around the garage?");
         garage.addChoice(new Choice("1. Check the Tool Chest",new Outcome("You find an old wrench in one of the drawers.Maybe you can use it to break or open something?","gainItem",wrench,"return")));
         garage.addChoice(new Choice("2. Check the Shelves",new Outcome("In the back of the shelves you find a crowbar. Maybe you can use it to open something?","gainItem",crowbar,"return")));
         garage.addChoice(new Choice("3. Leave the garage",new Outcome("You leave the garage","nextScene1")));
