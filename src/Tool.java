@@ -8,13 +8,8 @@ public class Tool extends Item {
         super(name);
         this.uses = new ArrayList<>();
     }
-    public ArrayList<String> getUses() {
-        return uses;
-    }
-    public void setUses(ArrayList<String> uses) {
-        this.uses = uses;
-    }
     public void addUse(String newUse) {
         uses.add(newUse);
+        Main.capabilities.add(newUse);
     }
 }

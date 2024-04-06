@@ -28,9 +28,9 @@ public class Main {
         //First room, and example setup.
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around");
-        strangeRoom1.addChoice(new Choice("Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey,"return")));
-        strangeRoom1.addChoice(new Choice("Check the dresser", new Outcome("There’s nothing but dust bunnies in here... Go back", "return")));
-        strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey")));
+        strangeRoom1.addChoice(new Choice("1. Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey,"return")));
+        strangeRoom1.addChoice(new Choice("2. Check the dresser", new Outcome("There’s nothing but dust bunnies in here... Go back", "return")));
+        strangeRoom1.addChoice(new Choice("3. Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey")));
         strangeRoom1.addNextScene(investigation);
 
         //investigation scene connected with choices and outcomes
@@ -49,16 +49,16 @@ public class Main {
         //kitchen scene
         kitchen.setStoryText("The kitchen's a mess. Maybe there's something in this mess");
         kitchen.setStoryTextRepeat("Keep looking around the kitchen");
-        kitchen.addChoice(new Choice("Check the Fridge",new Outcome("There's nothing but empty containers","return")));
-        kitchen.addChoice(new Choice("Check Under the Sink",new Outcome("It isn't opening. Maybe you could use something to pry it open","return"), new Outcome("You use the crowbar to pry open the cabinet door and find a red key.","gainItem",redkey,"crowbar"),new Outcome("You find a red key and leave the Kitchen. What could it unlock you wonder?","gainItem", redkey,"return")));
+        kitchen.addChoice(new Choice("1. Check the Fridge",new Outcome("There's nothing but empty containers","return")));
+        kitchen.addChoice(new Choice("2. Check Under the Sink",new Outcome("It isn't opening. Maybe you could use something to pry it open","return"), new Outcome("You use the crowbar to pry open the cabinet door and find a red key.","gainItem",redkey,"crowbar"),new Outcome("You find a red key and leave the Kitchen. What could it unlock you wonder?","gainItem", redkey,"return")));
         kitchen.addNextScene(investigation);
 
         //garage scene
         garage.setStoryText("It's dusty. An old car lies untouched. It probably doesn't run anymore. Look around for tools");
         garage.setStoryTextRepeat("Keep looking around for tools");
-        garage.addChoice(new Choice("Check the Tool Chest",new Outcome("You find an old wrench in one of the drawers.Maybe you can use it to break or open something?","gainItem",wrench,"return")));
-        garage.addChoice(new Choice("Check the Shelves",new Outcome("In the back of the shelves you find a crowbar. Maybe you can use it to open something?","gainItem",crowbar,"return")));
-        garage.addChoice(new Choice("Leave the garage",new Outcome("You leave the garage","nextScene4")));
+        garage.addChoice(new Choice("1. Check the Tool Chest",new Outcome("You find an old wrench in one of the drawers.Maybe you can use it to break or open something?","gainItem",wrench,"return")));
+        garage.addChoice(new Choice("2. Check the Shelves",new Outcome("In the back of the shelves you find a crowbar. Maybe you can use it to open something?","gainItem",crowbar,"return")));
+        garage.addChoice(new Choice("3. Leave the garage",new Outcome("You leave the garage","nextScene4")));
         garage.addNextScene(investigation);
 
         //ending scene text

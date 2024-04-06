@@ -1,0 +1,206 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\nimport java.util.Objects;\r\nimport java.util.Scanner;\r\n\r\npublic class Main {\r\n\r\n\r\n    //Inventory: can be accessed anywhere, and there is only one of them.\r\n    public static ArrayList<Item> inventory = new ArrayList<>();\r\n\r\n    //Capabilities is a class we will cycle through to check for matches. All items in your inventory will have their capabilities added to the ArrayList.\r\n    //Some items will have overlap- a crowbar could open a locked door but so could an appropriate key. This static ArrayList will not break in those scenarios.\r\n    public static ArrayList<String> capabilities;\r\n    public static void main(String[] args) {\r\n        Scanner scanner = new Scanner(System.in);  // Create a Scanner object\r\n\r\n        //General format for creating a new scene: Create scene. Give it story text. Give it choices. Give it other optional features\r\n\r\n        //Declaring all the scene objects\r\n        Scene strangeRoom1 = new Scene();\r\n        Scene investigation = new Scene();\r\n        Scene kitchen = new Scene();\r\n        Scene garage = new Scene();\r\n        Key bluekey = new Key(\"blue\");\r\n\r\n        //First room, and example setup.\r\n        strangeRoom1.setStoryText(\"You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.\");\r\n        strangeRoom1.setStoryTextRepeat(\"You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around\");\r\n        strangeRoom1.addChoice(new Choice(\"Check the desk\", new Outcome(\"You find a blue key in the drawer.\", \"gainItem\")));\r\n        strangeRoom1.addChoice(new Choice(\"Check the dresser\", new Outcome(\"There’s nothing but dust bunnies in here... Go back\", \"return\")));\r\n        strangeRoom1.addChoice(new Choice(\"Check the door\", new Outcome(\"It’s definitely locked\", \"return\"), new Outcome(\"You try the blue key, and it opens the door.\", \"nextScene1\")));\r\n\r\n\r\n        //\r\n//        investigation.setStoryText(\"You decide to look elsewhere for a way out\");\r\n//        investigation.setStoryTextRepeat(\"The key unlocks the door. You decide to look around for a way out\");\r\n//        investigation.addChoice(new Choice(\"Check the front door\", \"return\"));\r\n//        investigation.addChoice(new Choice(\"Check the back door\", \"return\"));\r\n//        investigation.addChoice(new Choice(\"Check the kitchen\", \"nextScene1\"));\r\n//        investigation.addNextScene(kitchen);\r\n//        investigation.addChoice(new Choice(\"Check the garage\", \"nextScene2\"));\r\n//        investigation.addNextScene(garage);\r\n\r\n\r\n\r\n        //Adding all the scenes that need to be accessed\r\n        strangeRoom1.addNextScene(investigation);\r\n\r\n        //begin\r\n        strangeRoom1.printScene();\r\n        //Runs the play method of the output scene.\r\n        strangeRoom1.choice(scanner.nextLine()).play();\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision f711134e4eb725f37a3ee7decf159bba88f04240)
++++ b/src/Main.java	(date 1711514538550)
+@@ -1,5 +1,4 @@
+ import java.util.ArrayList;
+-import java.util.Objects;
+ import java.util.Scanner;
+ 
+ public class Main {
+@@ -23,15 +22,16 @@
+         Scene garage = new Scene();
+         Key bluekey = new Key("blue");
+ 
++
+         //First room, and example setup.
+         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
+         strangeRoom1.setStoryTextRepeat("You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around");
+         strangeRoom1.addChoice(new Choice("Check the desk", new Outcome("You find a blue key in the drawer.", "gainItem")));
+         strangeRoom1.addChoice(new Choice("Check the dresser", new Outcome("There’s nothing but dust bunnies in here... Go back", "return")));
+-        strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1")));
++        strangeRoom1.addChoice(new Choice("Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey")));
+ 
+ 
+-        //
++//
+ //        investigation.setStoryText("You decide to look elsewhere for a way out");
+ //        investigation.setStoryTextRepeat("The key unlocks the door. You decide to look around for a way out");
+ //        investigation.addChoice(new Choice("Check the front door", "return"));
+Index: src/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Item {\r\n    private String name;\r\n\r\n    public Item(String name){\r\n        this.name = name;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Item.java b/src/Item.java
+--- a/src/Item.java	(revision f711134e4eb725f37a3ee7decf159bba88f04240)
++++ b/src/Item.java	(date 1711514267726)
+@@ -1,7 +1,8 @@
+ public class Item {
+-    private String name;
++    protected String name;
+ 
+     public Item(String name){
+         this.name = name;
++
+     }
+ }
+Index: src/Scene.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\nimport java.util.Objects;\r\nimport java.util.Scanner;\r\n\r\npublic class Scene {\r\n    //Scene will hold the storyline given to you along with the changes that should be made to your inventory\r\n    private String storyText;\r\n    private String storyTextRepeat;\r\n    private final ArrayList<Choice> choices = new ArrayList<>();\r\n    private final ArrayList<Scene> nextScenes = new ArrayList<>();\r\n    public Scene(){\r\n    }\r\n    public void printScene(){\r\n        System.out.println(storyText);\r\n        System.out.println(\"You can:\");\r\n        for(int i = 0; i < choices.size(); i++){\r\n            System.out.println(choices.get(i).getChoiceDescription());\r\n            if(i < choices.size()-1) {\r\n                System.out.println(\"or\");\r\n            }\r\n        }\r\n    }\r\n    //Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.\r\n    //It decides this based on what the capabilities are.\r\n    //It can also do other things, like say \"this.setRead = true;\" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities\r\n    public Scene choice(String userChoice){\r\n        //Cycle through all choices to check if what the user typed matches an option\r\n        for(int i = 0; i< choices.size(); i++) {//Cycle\r\n\r\n            Choice pickedChoice = choices.get(i);//Get current choice of cycle\r\n\r\n\r\n            //\r\n            //REPLACE WITH 1. 2. 3. SYSTEM. DON'T DO USERCHOICE.EQUALS(PICKEDCHOICE). ALSO CHANGE USERCHOICE INSIDE OF THE MAIN TO BE AN INT.\r\n            //\r\n\r\n            //Then, compare the current cycle's choice matches the user's input\r\n            if (userChoice.equals(pickedChoice.getChoiceDescription())) {\r\n                //If it does match, get the outcome and do the appropriate thing, like giving an item.\r\n\r\n                //However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.\r\n                //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilites, it happens.\r\n                //However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.\r\n                Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);\r\n                String requirement = \"a\";\r\n\r\n                for(int j = 0; j < Main.capabilities.size(); j++) {\r\n                    for (int k = 0; k < pickedChoice.get)\r\n                    if (pickedChoice.getOutcome(1).getRequirement() == Main.capabilities.get(j)) {\r\n                        pickedChoiceOutcome = pickedChoice.getOutcome(1);\r\n                    }\r\n                }\r\n\r\n                switch (pickedChoiceOutcome.getDescription()) {\r\n\r\n                    case \"gainItem\" -> {\r\n                        Main.inventory.add(pickedChoiceOutcome.getGainedItem());\r\n                        return this;\r\n                    }\r\n                    case \"return\" -> {\r\n                        return this;\r\n                    }\r\n                    case \"nextScene1\" -> {\r\n                        return nextScenes.get(0);\r\n                    }\r\n                    case \"nextScene2\" -> {\r\n                        return nextScenes.get(1);\r\n                    }\r\n                }\r\n\r\n            }\r\n        }\r\n        //if it makes it out of this for loop, we need to make it so the user is told that that's not an option, and is given a chance to retype a choice. Remove the return null.\r\n        return null;\r\n\r\n    }\r\n\r\n    //Getters and setters\r\n\r\n\r\n    public String getStoryTextRepeat() {\r\n        return storyTextRepeat;\r\n    }\r\n\r\n    public void setStoryTextRepeat(String storyTextRepeat) {\r\n        this.storyTextRepeat = storyTextRepeat;\r\n    }\r\n\r\n    public ArrayList<Choice> getChoices() {\r\n        return choices;\r\n    }\r\n\r\n    public void addChoice(Choice newChoice) {\r\n        choices.add(newChoice);\r\n    }\r\n    public ArrayList<Scene> getNextScenes() {\r\n        return nextScenes;\r\n    }\r\n    public void addNextScene(Scene newScene) {\r\n        nextScenes.add(newScene);\r\n    }\r\n    public String getStoryText() {\r\n        return storyText;\r\n    }\r\n    public void setStoryText(String storyText) {\r\n        this.storyText = storyText;\r\n    }\r\n\r\n\r\n\r\n    public void play() {\r\n        Scanner scanner = new Scanner(System.in);  // Create a Scanner object\r\n        this.printScene();\r\n        this.choice(scanner.nextLine()).play();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Scene.java b/src/Scene.java
+--- a/src/Scene.java	(revision f711134e4eb725f37a3ee7decf159bba88f04240)
++++ b/src/Scene.java	(date 1711514538554)
+@@ -6,6 +6,10 @@
+     //Scene will hold the storyline given to you along with the changes that should be made to your inventory
+     private String storyText;
+     private String storyTextRepeat;
++
++    //Need to set up system to make this true when after we go through one iteration.
++    //Then, use this boolean to determine what to print in the printScene method.
++    private boolean repeatText = false;
+     private final ArrayList<Choice> choices = new ArrayList<>();
+     private final ArrayList<Scene> nextScenes = new ArrayList<>();
+     public Scene(){
+@@ -44,10 +48,14 @@
+                 Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
+                 String requirement = "a";
+ 
+-                for(int j = 0; j < Main.capabilities.size(); j++) {
+-                    for (int k = 0; k < pickedChoice.get)
+-                    if (pickedChoice.getOutcome(1).getRequirement() == Main.capabilities.get(j)) {
+-                        pickedChoiceOutcome = pickedChoice.getOutcome(1);
++                //Cycling through capabilities and cycling through outcome requirements.
++                for(int j = 0; j < Main.capabilities.size(); j++) { //J IS CAPABILITIES CYCLE
++                    for (int k = 0; k < pickedChoice.getOutcomes().size(); k++) { //K IS REQUIREMENTS CYCLE
++                        if (pickedChoice.getOutcome(k).getRequirement() == Main.capabilities.get(j)) {
++                            //set pickedChoiceOutcome, the outcome object, to the outcome that happens when there's a requirement
++                            //Only happens when the requirement is met
++                            pickedChoiceOutcome = pickedChoice.getOutcome(1);
++                        }
+                     }
+                 }
+ 
+@@ -75,21 +83,23 @@
+ 
+     }
+ 
++    //Play method, recursive
++    public void play() {
++        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
++        this.printScene();
++        this.choice(scanner.nextLine()).play();
++    }
++
+     //Getters and setters
+-
+-
+     public String getStoryTextRepeat() {
+         return storyTextRepeat;
+     }
+-
+     public void setStoryTextRepeat(String storyTextRepeat) {
+         this.storyTextRepeat = storyTextRepeat;
+     }
+-
+     public ArrayList<Choice> getChoices() {
+         return choices;
+     }
+-
+     public void addChoice(Choice newChoice) {
+         choices.add(newChoice);
+     }
+@@ -105,12 +115,4 @@
+     public void setStoryText(String storyText) {
+         this.storyText = storyText;
+     }
+-
+-
+-
+-    public void play() {
+-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+-        this.printScene();
+-        this.choice(scanner.nextLine()).play();
+-    }
+ }
+Index: src/Tool.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\npublic class Tool extends Item {\r\n    //Tools have an arraylist of strings associated with them called uses.\r\n    //For example, a crowbar has uses such as removing planks or breaking open a window.\r\n    //However, not all tools need multiple uses. A flashlight might only have \"lightup\"\r\n    private ArrayList<String> uses;\r\n    public Tool(String name) {\r\n        super(name);\r\n        this.uses = new ArrayList<>();\r\n    }\r\n    public ArrayList<String> getUses() {\r\n        return uses;\r\n    }\r\n    public void setUses(ArrayList<String> uses) {\r\n        this.uses = uses;\r\n    }\r\n    public void addUse(String newUse) {\r\n        uses.add(newUse);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Tool.java b/src/Tool.java
+--- a/src/Tool.java	(revision f711134e4eb725f37a3ee7decf159bba88f04240)
++++ b/src/Tool.java	(date 1711514415663)
+@@ -8,13 +8,8 @@
+         super(name);
+         this.uses = new ArrayList<>();
+     }
+-    public ArrayList<String> getUses() {
+-        return uses;
+-    }
+-    public void setUses(ArrayList<String> uses) {
+-        this.uses = uses;
+-    }
+     public void addUse(String newUse) {
+         uses.add(newUse);
++        Main.capabilities.add(newUse);
+     }
+ }
+Index: src/Choice.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class Choice {\r\n    //Text description for the user to read when deciding what to do\r\n    private String choiceDescription;\r\n    //There's multiple outcomes. Via an if statement, we can decide which outcome is correct for this scenario.\r\n    private ArrayList<Outcome> outcomes;\r\n\r\n\r\n\r\n    public Choice(String choiceDescription, Outcome outcome) {\r\n        this.choiceDescription = choiceDescription;\r\n        outcomes.add(outcome);\r\n    }\r\n    public Choice(String choiceDescription, Outcome outcome1, Outcome outcome2) {\r\n        this.choiceDescription = choiceDescription;\r\n        outcomes.add(outcome1);\r\n        outcomes.add(outcome2);\r\n    }\r\n    //Multiple methods for creating choices with more than 1 outcome\r\n    public Choice(String choiceDescription, Outcome outcome1, Outcome outcome2, Outcome outcome3) {\r\n        this.choiceDescription = choiceDescription;\r\n        outcomes.add(outcome1);\r\n        outcomes.add(outcome2);\r\n        outcomes.add(outcome2);\r\n    }\r\n    public Choice(String choiceDescription, Outcome outcome1, Outcome outcome2, Outcome outcome3, Outcome outcome4) {\r\n        this.choiceDescription = choiceDescription;\r\n        outcomes.add(outcome1);\r\n        outcomes.add(outcome2);\r\n        outcomes.add(outcome3);\r\n        outcomes.add(outcome4);\r\n    }\r\n\r\n\r\n    public String getChoiceDescription() {\r\n        return choiceDescription;\r\n    }\r\n\r\n    public void setChoiceDescription(String choiceDescription) {\r\n        this.choiceDescription = choiceDescription;\r\n    }\r\n\r\n    public void addOutcome(Outcome outcome) {\r\n        if (outcomes == null) {\r\n            outcomes = new ArrayList<>();\r\n        }\r\n        outcomes.add(outcome);\r\n    }\r\n\r\n    public Outcome getOutcome(int index) {\r\n        if (outcomes == null || index < 0 || index >= outcomes.size()) {\r\n            // Handle invalid index or empty list appropriately, e.g., throw exception or return null\r\n            return null;\r\n        }\r\n        return outcomes.get(index);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Choice.java b/src/Choice.java
+--- a/src/Choice.java	(revision f711134e4eb725f37a3ee7decf159bba88f04240)
++++ b/src/Choice.java	(date 1711514267730)
+@@ -55,4 +55,12 @@
+         }
+         return outcomes.get(index);
+     }
++
++    public ArrayList<Outcome> getOutcomes() {
++        return outcomes;
++    }
++
++    public void setOutcomes(ArrayList<Outcome> outcomes) {
++        this.outcomes = outcomes;
++    }
+ }
+Index: src/Key.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Key extends Item {\r\n    private String color;\r\n    public Key(String color){\r\n        //Basically takes 1 input- what color the key is. Then uses that to set the use as that + door because keys are for doors silly\r\n        super(color + \"door\");\r\n        this.color = color;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Key.java b/src/Key.java
+--- a/src/Key.java	(revision f711134e4eb725f37a3ee7decf159bba88f04240)
++++ b/src/Key.java	(date 1711514538557)
+@@ -2,8 +2,9 @@
+     private String color;
+     public Key(String color){
+         //Basically takes 1 input- what color the key is. Then uses that to set the use as that + door because keys are for doors silly
+-        super(color + "door");
++        super(color + "key");
+         this.color = color;
++        Main.capabilities.add(name);
+     }
+ 
+ }
