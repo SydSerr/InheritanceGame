@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class Scene {
@@ -52,40 +54,35 @@ public class Scene {
                 //However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.
                 //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilites, it happens.
                 //However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.
-                Outcome pickedChoiceOutcome = pickedChoice.getOutcome(0);
+                //Additionally, this default has to be atomic as we change it off of getOutcome(0) inside a lambda expression if we recognize the outcome has all requirements met
+                AtomicReference<Outcome> pickedChoiceOutcome = new AtomicReference<>(pickedChoice.getOutcome(0));
 
                 //Cycle through all capabilities
-                for (int j = 0; j < Main.capabilities.size(); j++) {
+                Main.capabilities.forEach(capability -> {
                     //Cycle through all outcomes
-                    for (int k = 0; k < pickedChoice.getOutcomes().size(); k++) {
+                    pickedChoice.getOutcomes().forEach(outcome -> {
                         //Cycle through all requirements for every outcome
-                        int requirementsCounter = 0;
-                        for (int l = 0; l < pickedChoice.getOutcome(k).getRequirements().size(); l++) {
-                            //This one's a bit of a doozy in terms of readability
-                            //It means that we look at the pickedChoice, then look at the first outcome (k) and it's requirement (l).
-                            //Then we cycle through the requirements of the first outcome, by using the for loop for l
-                            //Then we cycle through the outcomes, repeating the previous requirement cycle every time.
-                            //With every one of these cycles, we compare the requirement from the requirements from the outcome from the choice.
-                            //We compare this requirement to the current capability.
-                            if (Objects.equals(pickedChoice.getOutcome(k).getRequirements().get(l), Main.capabilities.get(j))) {
+                        //IDE demands this is atomic because it is in a lambda, and it ensures thread safety as it runs
+                        AtomicInteger requirementsCounter = new AtomicInteger();
+                        outcome.getRequirements().forEach(requirement -> {
+                            if (Objects.equals(requirement, capability)) {
                                 //Need to make sure all requirements are met. So, we need to confirm that l,
-                                requirementsCounter++;
+                                requirementsCounter.getAndIncrement();
                             }
+                        });
+                        if (requirementsCounter.get() == outcome.getRequirements().size()){
+                            pickedChoiceOutcome.set(outcome);
                         }
-                        //This means all requirements have been accounted for.
-                        if (requirementsCounter == pickedChoice.getOutcome(k).getRequirements().size()){
-                            pickedChoiceOutcome = pickedChoice.getOutcome(k);
-                        }
-                    }
-                }
-                System.out.println(pickedChoiceOutcome.getDescription());
+                    });
+                });
+                System.out.println(pickedChoiceOutcome.get().getDescription());
                 waitForEnter();
 
 
-                switch (pickedChoiceOutcome.getEvent()) {
+                switch (pickedChoiceOutcome.get().getEvent()) {
 
                     case "gainItem" -> {
-                        pickedChoiceOutcome.getGainedItem().gain();
+                        pickedChoiceOutcome.get().getGainedItem().gain();
                         return this;
                     }
                     case "return" -> {
@@ -102,7 +99,7 @@ public class Scene {
                         System.exit(0);
                     }
 
-                    default -> throw new IllegalStateException("Unexpected value: " + pickedChoiceOutcome.getEvent());
+                    default -> throw new IllegalStateException("Unexpected value: " + pickedChoiceOutcome.get().getEvent());
                 }
             }
         }
