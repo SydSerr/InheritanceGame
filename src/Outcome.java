@@ -5,7 +5,8 @@ public class Outcome {
     private String description;
 
     //Can be return, gainItem, nextScene, or other stuff. Used on the backend; the user won't see this.
-    private ArrayList<String> events = new ArrayList<>();
+    //private ArrayList<String> events = new ArrayList<>();
+    private String event;
     private Item gainedItem;
     private Item usedItem;
     private ArrayList<String> requirements = new ArrayList<>();
@@ -14,25 +15,29 @@ public class Outcome {
     //Overloaded constructors for different types of outcomes: some with requirements, some with gaineditems, some both
     public Outcome(String description, String event, String requirement) {
         this.description = description;
-        this.events.add(event);
+        this.event = event;
+        this.requirements.add(requirement);
+    }
+    public Outcome(String description, String event, Item gainedItem, String requirement) {
+        this.description = description;
+        this.event = event;
         this.requirements.add(requirement);
     }
     public Outcome(String description, String event) {
         this.description = description;
-        this.events.add(event);
+        this.event = event;
     }
     public Outcome(String description, String event, String requirement1, String requirement2, String requirement3) {
         this.description = description;
-        this.events.add(event);
+        this.event = event;
         this.requirements.add(requirement1);
         this.requirements.add(requirement2);
         this.requirements.add(requirement3);
     }
-    public Outcome(String description, String event1, Item gainedItem, String event2) {
+    public Outcome(String description, String event, Item gainedItem) {
         this.description = description;
-        this.events.add(event1);
+        this.event = event;
         this.gainedItem = gainedItem;
-        this.events.add(event2);
     }
 
     public String getDescription() {
@@ -43,13 +48,7 @@ public class Outcome {
         this.description = description;
     }
 
-    public ArrayList<String> getEvents() {
-        return events;
-    }
 
-    public void setEvents(ArrayList<String> events) {
-        this.events = events;
-    }
 
     public ArrayList<String> getRequirements() {
         return requirements;
@@ -74,6 +73,14 @@ public class Outcome {
 
     public void setUsedItem(Item usedItem) {
         this.usedItem = usedItem;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public String getEvent() {
+        return event;
     }
 }
 /* Stolen from old stuff

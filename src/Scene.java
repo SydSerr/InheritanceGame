@@ -26,14 +26,10 @@ public class Scene {
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
     public Scene choice(int userChoice){
         //Cycle through all choices to check if what the user typed matches an option
-        for(int i = 0; i< choices.size(); i++) {//Cycle
-            Choice pickedChoice = choices.get(i);//Get current choice of cycle
-
-            //Then, compare the current cycle's choice matches the user's input
-
-            //System.out.println(Character.getNumericValue(pickedChoice.getChoiceDescription().charAt(0)));
+        for(int i = 0; i< choices.size(); i++) {//Cycle through all of choices
+            Choice pickedChoice = choices.get(i);//Get current choice of cycle, call this pickedChoice
+            //However, pickedChoice doesn't really make sense as "picked" if it's not picked. This if statement makes sure it is picked.
             if (userChoice == Character.getNumericValue(pickedChoice.getChoiceDescription().charAt(0))) {
-
                 //If it does match, get the outcome and do the appropriate thing, like giving an item.
 
                 //However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.
@@ -63,7 +59,7 @@ public class Scene {
                 }
 
 
-                switch (pickedChoiceOutcome.getEvents().get(i)) {
+                switch (pickedChoiceOutcome.getEvent()) {
 
                     case "gainItem" -> {
                         Main.inventory.add(pickedChoiceOutcome.getGainedItem());
