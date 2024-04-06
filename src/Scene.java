@@ -61,9 +61,9 @@ public class Scene {
                 Main.capabilities.forEach(capability -> {
                     //Cycle through all outcomes
                     pickedChoice.getOutcomes().forEach(outcome -> {
-                        //Cycle through all requirements for every outcome
                         //IDE demands this is atomic because it is in a lambda, and it ensures thread safety as it runs
                         AtomicInteger requirementsCounter = new AtomicInteger();
+                        //Cycle through all requirements for every outcome
                         outcome.getRequirements().forEach(requirement -> {
                             if (Objects.equals(requirement, capability)) {
                                 //Need to make sure all requirements are met. So, we need to confirm that l,
