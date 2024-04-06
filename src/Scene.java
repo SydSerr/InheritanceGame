@@ -14,20 +14,21 @@ public class Scene {
     private boolean scenePlayed = false;
     private static final Scanner enterscanner = new Scanner(System.in);
     private static final Scanner intscanner = new Scanner(System.in);
+
     // Method to wait for user to press enter
     public static void waitForEnter() {
         System.out.println("Press enter to continue.");
         enterscanner.nextLine(); // Waits for user to press enter
     }
 
-    public Scene(){
+    public Scene() {
     }
-    public void printScene(){
+
+    public void printScene() {
         //Prints the story text
-        if(scenePlayed && storyTextRepeat != null){
+        if (scenePlayed && storyTextRepeat != null) {
             System.out.println(storyTextRepeat);
-        }
-        else{
+        } else {
             System.out.println(storyText);
         }
         //sets scenePlayed
@@ -42,9 +43,8 @@ public class Scene {
     //Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.
     //It decides this based on what the capabilities are.
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
-    public Scene choice(int userChoice){
+    public Scene choice(int userChoice) {
 
-        //System.out.println(Main.capabilities);
         //Cycle through all choices to check if what the user typed matches an option
         //Get current choice of cycle, call this pickedChoice
         for (Choice pickedChoice : choices) { //Cycle through all of choices
@@ -57,25 +57,28 @@ public class Scene {
                 //Additionally, this default has to be atomic as we change it off of getOutcome(0) inside a lambda expression if we recognize the outcome has all requirements met
                 AtomicReference<Outcome> pickedChoiceOutcome = new AtomicReference<>(pickedChoice.getOutcome(0));
 
-                //Cycle through all capabilities
-                Main.capabilities.forEach(capability -> {
-                    //Cycle through all outcomes
-                    pickedChoice.getOutcomes().forEach(outcome -> {
-                        //IDE demands this is atomic because it is in a lambda, and it ensures thread safety as it runs
-                        AtomicInteger requirementsCounter = new AtomicInteger();
-                        //Cycle through all requirements for every outcome
-                        outcome.getRequirements().forEach(requirement -> {
+                //Cycle through all outcomes
+                pickedChoice.getOutcomes().forEach(outcome -> {
+                    //IDE demands this is atomic because it is in a lambda, and it ensures thread safety as it runs
+                    AtomicInteger requirementsCounter = new AtomicInteger();
+                    //Cycle through all requirements for every outcome
+                    outcome.getRequirements().forEach(requirement -> {
+                        //Cycle through all capabilities
+                        Main.capabilities.forEach(capability -> {
                             if (Objects.equals(requirement, capability)) {
                                 //Need to make sure all requirements are met. So, we need to confirm that l,
                                 requirementsCounter.getAndIncrement();
                             }
                         });
-                        if (requirementsCounter.get() == outcome.getRequirements().size()){
-                            pickedChoiceOutcome.set(outcome);
-                        }
                     });
+                    if (requirementsCounter.get() >= outcome.getRequirements().size()) {
+                        System.out.println("requirements met!!" + outcome.getDescription());
+                        pickedChoiceOutcome.set(outcome);
+                    }
                 });
+
                 System.out.println(pickedChoiceOutcome.get().getDescription());
+                System.out.println(Main.capabilities);
                 waitForEnter();
 
 
@@ -99,7 +102,8 @@ public class Scene {
                         System.exit(0);
                     }
 
-                    default -> throw new IllegalStateException("Unexpected value: " + pickedChoiceOutcome.get().getEvent());
+                    default ->
+                            throw new IllegalStateException("Unexpected value: " + pickedChoiceOutcome.get().getEvent());
                 }
             }
         }
@@ -114,6 +118,7 @@ public class Scene {
     public void setStoryTextRepeat(String storyTextRepeat) {
         this.storyTextRepeat = storyTextRepeat;
     }
+
     public void addChoice(Choice newChoice) {
         choices.add(newChoice);
     }
