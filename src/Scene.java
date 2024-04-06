@@ -100,10 +100,10 @@ public class Scene {
             }
         }
             //if user number picked isn't a choice number (validChoice): shows error message and prompts user to continue to try again
-            if (!validChoice){
+
                 System.out.println("Not a Valid Option! Continue to retry!");
                 waitForEnter();
-        }
+
         return this;
 
     }
