@@ -85,9 +85,6 @@ public class Scene {
                     case "nextScene2" -> {
                         return nextScenes.get(1);
                     }
-                    case "nextScene3" -> {
-                        return nextScenes.get(2);
-                    }
                     case "ending" -> {
                         System.out.println("Congratulations! You Escaped! Restart to play again!");
                         System.exit(0);
