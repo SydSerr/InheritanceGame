@@ -42,6 +42,7 @@ public class Scene {
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
     public Scene choice(int userChoice){
         boolean validChoice = false;
+
         //System.out.println(Main.capabilities);
         //Cycle through all choices to check if what the user typed matches an option
         //Get current choice of cycle, call this pickedChoice
@@ -75,6 +76,7 @@ public class Scene {
                 System.out.println(pickedChoiceOutcome.getDescription());
                 waitForEnter();
 
+
                 switch (pickedChoiceOutcome.getEvent()) {
 
                     case "gainItem" -> {
@@ -100,7 +102,6 @@ public class Scene {
             }
         }
             //if user number picked isn't a choice number (validChoice): shows error message and prompts user to continue to try again
-
                 System.out.println("Not a Valid Option! Continue to retry!");
                 waitForEnter();
 
