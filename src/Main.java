@@ -60,7 +60,8 @@ public class Main {
         garage.setStoryTextRepeat("Keep looking around the garage?");
         garage.addChoice(new Choice("1. Check the metal chest", new Outcome("You find an old adjustable wrench in one of the drawers. Versatile. You pocket it.", "gainItem", wrench)));
         garage.addChoice(new Choice("2. Check the shelves", new Outcome("In the back of the shelves you find a crowbar. You carry it along with you.", "gainItem", crowbar)));
-        garage.addChoice(new Choice("3. Leave the garage", new Outcome("You leave the garage.", "nextScene1")));
+        garage.addChoice(new Choice("3. Check the old car.", new Outcome("It's locked. You clear the dust on the window, and peer inside. It seems to be completely empty.", "return"), new Outcome("You pry open a door, and check inside. It smells awful, and its completely empty. The trunk has also been cleaned out.", "return", "pry")));
+        garage.addChoice(new Choice("4. Leave the garage", new Outcome("You leave the garage.", "nextScene1")));
         garage.addNextScene(investigation);
 
         //begin
