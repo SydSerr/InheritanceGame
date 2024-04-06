@@ -13,4 +13,10 @@ public class Tool extends Item {
         uses.add(newUse);
         Main.capabilities.add(newUse);
     }
+    @Override
+    public void gain(){
+        for(String use : uses){
+            Main.capabilities.add(use);
+        }
+    }
 }

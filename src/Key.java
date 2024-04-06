@@ -5,7 +5,6 @@ public class    Key extends Item {
         //Basically takes 1 input- what color the key is. Then uses that to set the use as that + door because keys are for doors silly
         super(color + "key");
         this.color = color;
-        Main.capabilities.add(name);
     }
 
 }

@@ -4,6 +4,8 @@ public class Item {
 
     public Item(String name){
         this.name = name;
-
+    }
+    public void gain(){
+        Main.capabilities.add(name);
     }
 }

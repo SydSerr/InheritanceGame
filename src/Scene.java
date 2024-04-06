@@ -38,6 +38,7 @@ public class Scene {
     //It decides this based on what the capabilities are.
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
     public Scene choice(int userChoice){
+        System.out.println(Main.capabilities);
         //Cycle through all choices to check if what the user typed matches an option
         //Get current choice of cycle, call this pickedChoice
         for (Choice pickedChoice : choices) {//Cycle through all of choices

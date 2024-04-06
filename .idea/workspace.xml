@@ -191,7 +191,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712373492445</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="4/5">
+      <option name="closed" value="true" />
+      <created>1712373725788</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1712373725788</updated>
+    </task>
+    <task id="LOCAL-00016" summary="4/5">
+      <option name="closed" value="true" />
+      <created>1712374229944</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1712374229944</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -200,16 +216,5 @@
     <MESSAGE value="3/25" />
     <MESSAGE value="4/5" />
     <option name="LAST_COMMIT_MESSAGE" value="4/5" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tool.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
