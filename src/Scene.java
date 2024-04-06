@@ -9,15 +9,22 @@ public class Scene {
     private String storyTextRepeat;
     private final ArrayList<Choice> choices = new ArrayList<>();
     private final ArrayList<Scene> nextScenes = new ArrayList<>();
+
+    private boolean scenePlayed = false;
+
     public Scene(){
     }
     public void printScene(){
         System.out.println(storyText);
+        if(scenePlayed && storyTextRepeat != null){
+            System.out.println(storyTextRepeat);
+        }
         System.out.println("You can:");
         for (Choice choice : choices) {
             System.out.println(choice.getChoiceDescription());
         }
     }
+
     //Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.
     //It decides this based on what the capabilities are.
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
@@ -49,12 +56,9 @@ public class Scene {
                             if (Objects.equals(pickedChoice.getOutcome(k).getRequirements().get(l), Main.capabilities.get(j))) {
                                 pickedChoiceOutcome = pickedChoice.getOutcome(k);
                             }
-
                         }
-
                     }
                 }
-
 
                 switch (pickedChoiceOutcome.getEvent()) {
 
@@ -115,11 +119,19 @@ public class Scene {
     public void setStoryText(String storyText) {
         this.storyText = storyText;
     }
+    public boolean isScenePlayed() {
+        return scenePlayed;
+    }
+    public void setScenePlayed(boolean scenePlayed) {
+        this.scenePlayed = scenePlayed;
+    }
 
 
     public void play() {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         this.printScene();
         this.choice(scanner.nextInt()).play();
+        //sets scenePlayed
+        scenePlayed = true;
     }
 }
