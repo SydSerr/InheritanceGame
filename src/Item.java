@@ -1,3 +1,4 @@
+//item class for tool and key
 public class Item {
     protected String name;
 

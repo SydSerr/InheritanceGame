@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+//tool class that inherits from item
 public class Tool extends Item {
     //Tools have an arraylist of strings associated with them called uses.
     //For example, a crowbar has uses such as removing planks or breaking open a window.

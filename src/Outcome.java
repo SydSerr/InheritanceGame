@@ -40,24 +40,19 @@ public class Outcome {
         this.gainedItem = gainedItem;
     }
 
+    //getters and setters
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
     public ArrayList<String> getRequirements() {
         return requirements;
     }
-
     public void setRequirements(ArrayList<String> requirements) {
         this.requirements = requirements;
     }
-
 
     public Item getGainedItem() {
         return gainedItem;
