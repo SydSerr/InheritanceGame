@@ -10,11 +10,13 @@ public class Scene {
     private final ArrayList<Choice> choices = new ArrayList<>();
     private final ArrayList<Scene> nextScenes = new ArrayList<>();
     private boolean scenePlayed = false;
+    private static Scanner scanner = new Scanner(System.in);
 
     // Method to wait for user to press enter
     public static void waitForEnter() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Press enter to continue.");
-        Main.scanner.nextLine(); // Waits for user to press enter1
+        scanner.nextLine(); // Waits for user to press enter
     }
 
     public Scene(){
@@ -38,7 +40,7 @@ public class Scene {
     //It decides this based on what the capabilities are.
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
     public Scene choice(int userChoice){
-        System.out.println(Main.capabilities);
+        //System.out.println(Main.capabilities);
         //Cycle through all choices to check if what the user typed matches an option
         //Get current choice of cycle, call this pickedChoice
         for (Choice pickedChoice : choices) {//Cycle through all of choices
@@ -74,7 +76,7 @@ public class Scene {
                 switch (pickedChoiceOutcome.getEvent()) {
 
                     case "gainItem" -> {
-                        Main.inventory.add(pickedChoiceOutcome.getGainedItem());
+                        pickedChoiceOutcome.getGainedItem().gain();
                         return this;
                     }
                     case "return" -> {
@@ -137,7 +139,6 @@ public class Scene {
 
 
     public void play() {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         this.printScene();
         this.choice(scanner.nextInt()).play();
 

@@ -3,12 +3,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    //Inventory: can be accessed anywhere, and there is only one of them.
-    public static ArrayList<Item> inventory = new ArrayList<>();
     //Capabilities is a class we will cycle through to check for matches. All items in your inventory will have their capabilities added to the ArrayList.
     //Some items will have overlap- a crowbar could open a locked door but so could an appropriate key. This static ArrayList will not break in those scenarios.
     public static ArrayList<String> capabilities = new ArrayList<>();
-    public static Scanner scanner = new Scanner(System.in);
 
     // Example usage
 
@@ -33,10 +30,10 @@ public class Main {
 
         //First room, and example setup.
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
-        strangeRoom1.setStoryTextRepeat("You’re still in the room. Maybe there’s something useful around");
+        strangeRoom1.setStoryTextRepeat("You’re still in the room. Maybe there’s something useful around. ");
         strangeRoom1.addChoice(new Choice("1. Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey)));
         strangeRoom1.addChoice(new Choice("2. Check the dresser", new Outcome("There’s nothing but dust bunnies in here...", "return")));
-        strangeRoom1.addChoice(new Choice("3. Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey")));
+        strangeRoom1.addChoice(new Choice("3. Check the door", new Outcome("You try to open the door. It's definitely locked.", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey")));
         strangeRoom1.addNextScene(investigation);
 
         //investigation scene connected with choices and outcomes
@@ -70,6 +67,7 @@ public class Main {
         strangeRoom1.printScene();
         System.out.println("Type the number of your choice, and hit enter.");
         //Runs the play method of the output scene.
+        Scanner scanner = new Scanner(System.in);
         strangeRoom1.choice(scanner.nextInt()).play();
 
 
