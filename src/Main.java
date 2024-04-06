@@ -8,8 +8,11 @@ public class Main {
     //Capabilities is a class we will cycle through to check for matches. All items in your inventory will have their capabilities added to the ArrayList.
     //Some items will have overlap- a crowbar could open a locked door but so could an appropriate key. This static ArrayList will not break in those scenarios.
     public static ArrayList<String> capabilities = new ArrayList<>();
+    public static Scanner scanner = new Scanner(System.in);
+
+    // Example usage
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 
         //General format for creating a new scene: Create scene. Give it story text. Give it choices. Give it other optional features
 

@@ -9,8 +9,13 @@ public class Scene {
     private String storyTextRepeat;
     private final ArrayList<Choice> choices = new ArrayList<>();
     private final ArrayList<Scene> nextScenes = new ArrayList<>();
-
     private boolean scenePlayed = false;
+
+    // Method to wait for user to press enter
+    public static void waitForEnter() {
+        System.out.println("Press enter to continue.");
+        Main.scanner.nextLine(); // Waits for user to press enter1
+    }
 
     public Scene(){
     }
@@ -64,6 +69,7 @@ public class Scene {
                     }
                 }
                 System.out.println(pickedChoiceOutcome.getDescription());
+                waitForEnter();
                 switch (pickedChoiceOutcome.getEvent()) {
 
                     case "gainItem" -> {
@@ -82,9 +88,10 @@ public class Scene {
                     case "nextScene3" -> {
                         return nextScenes.get(2);
                     }
-                    case "ending" ->
+                    case "ending" -> {
                         System.out.println("Congratulations! You Escaped! Restart to play again!");
-
+                        System.exit(0);
+                    }
 
                     default -> throw new IllegalStateException("Unexpected value: " + pickedChoiceOutcome.getEvent());
                 }
