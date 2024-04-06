@@ -48,8 +48,10 @@ public class Scene {
                             //This one's a bit of a doozy in terms of readability
                             //It means that we look at the pickedChoice, then look at the first outcome (k) and it's requirement (l).
                             //Then we cycle through the requirements of the first outcome, by using the for loop for l
-                            //Then, if
-                            if (pickedChoice.getOutcome(k).getRequirements().get(l) == Main.capabilities.get(j)) {
+                            //Then we cycle through the outcomes, repeating the previous requirement cycle every time.
+                            //With every one of these cycles, we compare the requirement from the requirements from the outcome from the choice.
+                            //We compare this requirement to the current capability.
+                            if (Objects.equals(pickedChoice.getOutcome(k).getRequirements().get(l), Main.capabilities.get(j))) {
                                 pickedChoiceOutcome = pickedChoice.getOutcome(k);
                             }
 
