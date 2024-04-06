@@ -15,10 +15,14 @@ public class Scene {
     public Scene(){
     }
     public void printScene(){
-        System.out.println(storyText);
         if(scenePlayed && storyTextRepeat != null){
             System.out.println(storyTextRepeat);
         }
+        else{
+            System.out.println(storyText);
+        }
+        //sets scenePlayed
+        scenePlayed = true;
         System.out.println("You can:");
         for (Choice choice : choices) {
             System.out.println(choice.getChoiceDescription());
@@ -131,7 +135,6 @@ public class Scene {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         this.printScene();
         this.choice(scanner.nextInt()).play();
-        //sets scenePlayed
-        scenePlayed = true;
+
     }
 }
