@@ -10,13 +10,12 @@ public class Scene {
     private final ArrayList<Choice> choices = new ArrayList<>();
     private final ArrayList<Scene> nextScenes = new ArrayList<>();
     private boolean scenePlayed = false;
-    private static Scanner scanner = new Scanner(System.in);
-
+    private static final Scanner enterscanner = new Scanner(System.in);
+    private static final Scanner intscanner = new Scanner(System.in);
     // Method to wait for user to press enter
     public static void waitForEnter() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Press enter to continue.");
-        scanner.nextLine(); // Waits for user to press enter
+        enterscanner.nextLine(); // Waits for user to press enter
     }
 
     public Scene(){
@@ -73,6 +72,7 @@ public class Scene {
                 }
                 System.out.println(pickedChoiceOutcome.getDescription());
                 waitForEnter();
+
                 switch (pickedChoiceOutcome.getEvent()) {
 
                     case "gainItem" -> {
@@ -140,7 +140,7 @@ public class Scene {
 
     public void play() {
         this.printScene();
-        this.choice(scanner.nextInt()).play();
+        this.choice(intscanner.nextInt()).play();
 
     }
 }

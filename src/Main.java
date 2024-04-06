@@ -28,7 +28,8 @@ public class Main {
         crowbar.addUse("pry");
         crowbar.addUse("smash");
 
-        //First room, and example setup.
+        //First room
+        System.out.println("Tip: Drag up on the console to view more text");
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. Maybe there’s something useful around. ");
         strangeRoom1.addChoice(new Choice("1. Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey)));
