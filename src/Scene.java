@@ -98,6 +98,9 @@ public class Scene {
                     default -> throw new IllegalStateException("Unexpected value: " + pickedChoiceOutcome.getEvent());
                 }
             }
+            else{
+
+            }
         }
         //if it makes it out of this for loop, we need to make it so the user is told that that's not an option, and is given a chance to retype a choice. Remove the return null.
         return null;
@@ -105,40 +108,25 @@ public class Scene {
     }
 
     //Getters and setters
-    public String getStoryTextRepeat() {
-        return storyTextRepeat;
-    }
+
 
     public void setStoryTextRepeat(String storyTextRepeat) {
         this.storyTextRepeat = storyTextRepeat;
     }
 
-    public ArrayList<Choice> getChoices() {
-        return choices;
-    }
+
 
     public void addChoice(Choice newChoice) {
         choices.add(newChoice);
     }
-    public ArrayList<Scene> getNextScenes() {
-        return nextScenes;
-    }
+
     public void addNextScene(Scene newScene) {
         nextScenes.add(newScene);
     }
-    public String getStoryText() {
-        return storyText;
-    }
+
     public void setStoryText(String storyText) {
         this.storyText = storyText;
     }
-    public boolean isScenePlayed() {
-        return scenePlayed;
-    }
-    public void setScenePlayed(boolean scenePlayed) {
-        this.scenePlayed = scenePlayed;
-    }
-
 
     public void play() {
         this.printScene();
