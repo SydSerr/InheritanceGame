@@ -59,7 +59,7 @@ public class Scene {
                         }
                     }
                 }
-
+                System.out.println(pickedChoiceOutcome.getDescription());
                 switch (pickedChoiceOutcome.getEvent()) {
 
                     case "gainItem" -> {
