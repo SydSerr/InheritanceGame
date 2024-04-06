@@ -21,6 +21,7 @@ public class Outcome {
     public Outcome(String description, String event, Item gainedItem, String requirement) {
         this.description = description;
         this.event = event;
+        this.gainedItem = gainedItem;
         this.requirements.add(requirement);
     }
     public Outcome(String description, String event) {

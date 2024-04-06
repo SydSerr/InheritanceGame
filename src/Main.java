@@ -52,7 +52,7 @@ public class Main {
         kitchen.setStoryText("The kitchen's a mess. Maybe there's something in this mess..");
         kitchen.setStoryTextRepeat("Keep looking around the kitchen?");
         kitchen.addChoice(new Choice("1. Check the fridge",new Outcome("There's nothing but empty containers...","return")));
-        kitchen.addChoice(new Choice("2. Check under the sink",new Outcome("It isn't opening. Maybe you could use something to pry it open.","return"), new Outcome("You pry open the cabinet door and find a red key.","gainItem",redkey,"pry")));
+        kitchen.addChoice(new Choice("2. Check under the sink",new Outcome("It isn't opening. Maybe you could use something to pry it open.","return"), new Outcome("You pry open the cabinet door and find a red key.","gainItem", redkey,"pry")));
         kitchen.addChoice(new Choice( "3. Leave kitchen",new Outcome("You leave the kitchen.","nextScene1")));
         kitchen.addNextScene(investigation);
 
