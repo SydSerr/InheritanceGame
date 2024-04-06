@@ -29,7 +29,7 @@ public class Main {
         crowbar.addUse("smash");
 
         //First room
-        System.out.println("Tip: Drag up on the console to view more text");
+        System.out.println("Tip: Drag up on the console to view more text!");
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. Maybe there’s something useful around. ");
         strangeRoom1.addChoice(new Choice("1. Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey)));
@@ -59,8 +59,8 @@ public class Main {
         //garage scene
         garage.setStoryText("It's dusty. An old car lies untouched. It probably doesn't run anymore. There could be useful tools laying around.");
         garage.setStoryTextRepeat("Keep looking around the garage?");
-        garage.addChoice(new Choice("1. Check the metal chest",new Outcome("You find an old adjustable wrench in one of the drawers. Versatile. You pocket it.","gainItem",wrench,"return")));
-        garage.addChoice(new Choice("2. Check the shelves",new Outcome("In the back of the shelves you find a crowbar. You carry it along with you.","gainItem",crowbar,"return")));
+        garage.addChoice(new Choice("1. Check the metal chest",new Outcome("You find an old adjustable wrench in one of the drawers. Versatile. You pocket it.","gainItem", wrench)));
+        garage.addChoice(new Choice("2. Check the shelves",new Outcome("In the back of the shelves you find a crowbar. You carry it along with you.","gainItem", crowbar)));
         garage.addChoice(new Choice("3. Leave the garage",new Outcome("You leave the garage.","nextScene1")));
         garage.addNextScene(investigation);
 

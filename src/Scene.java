@@ -21,6 +21,7 @@ public class Scene {
     public Scene(){
     }
     public void printScene(){
+        //Prints the story text
         if(scenePlayed && storyTextRepeat != null){
             System.out.println(storyTextRepeat);
         }
@@ -29,6 +30,7 @@ public class Scene {
         }
         //sets scenePlayed
         scenePlayed = true;
+        //Prints the choices
         System.out.println("You can:");
         for (Choice choice : choices) {
             System.out.println(choice.getChoiceDescription());
