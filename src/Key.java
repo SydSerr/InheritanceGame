@@ -1,3 +1,4 @@
+//key class that inherits from item
 public class    Key extends Item {
     private String color;
     public Key(String color){

@@ -21,13 +21,13 @@ public class Main {
         Scene investigation = new Scene();
         Scene kitchen = new Scene();
         Scene garage = new Scene();
-
+        //declaring key and tool objects
         Key bluekey = new Key("blue");
         Key redkey = new Key("red");
         Tool wrench = new Tool("wrench");
         Tool crowbar = new Tool("crowbar");
 
-        //First room, and example setup.
+        //First room scene with choices and outcomes
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around");
         strangeRoom1.addChoice(new Choice("1. Check the desk", new Outcome("You find a blue key in the drawer. You take it with you.", "gainItem", bluekey)));
@@ -35,7 +35,7 @@ public class Main {
         strangeRoom1.addChoice(new Choice("3. Check the door", new Outcome("It’s definitely locked", "return"), new Outcome("You try the blue key, and it opens the door.", "nextScene1", "bluekey")));
         strangeRoom1.addNextScene(investigation);
 
-        //investigation scene connected with choices and outcomes
+        //investigation scene connected with choices and outcomes to previous and next scenes
         investigation.setStoryText("The key unlocks the door. You need to find a way out. Maybe look around?");
         investigation.setStoryTextRepeat("Keep Looking Around");
         investigation.addChoice(new Choice("1. Check Front Door",new Outcome("The front door is jammed shut. There's no real way to open it. Find another way out.","return")));
@@ -44,9 +44,9 @@ public class Main {
         investigation.addNextScene(kitchen);
         investigation.addChoice(new Choice("4. Check the Garage", new Outcome("You walk into the garage.","nextScene2")));
         investigation.addNextScene(garage);
-        investigation.addChoice(new Choice("5. Check window", new Outcome("The window could probably break if you hit it with something.","return"), new Outcome ("You break the window with the wrench, but it's too small to fit through. You need to find another way out.","return")));
+        investigation.addChoice(new Choice("5. Check window", new Outcome("The window could probably break if you hit it with something.","return"), new Outcome ("You break the window with the wrench, but it's too small to fit through. You need to find another way out.","return","wrench")));
 
-        //kitchen scene
+        //kitchen scene w/ choices and outcomes connected
         kitchen.setStoryText("The kitchen's a mess. Maybe there's something in this mess");
         kitchen.setStoryTextRepeat("Keep looking around the kitchen");
         kitchen.addChoice(new Choice("1. Check the Fridge",new Outcome("There's nothing but empty containers","return")));
@@ -54,7 +54,7 @@ public class Main {
         kitchen.addChoice(new Choice( "3. Leave Kitchen",new Outcome("You leave the kitchen","nextScene1")));
         kitchen.addNextScene(investigation);
 
-        //garage scene
+        //garage scene w/choices and outcomes connected
         garage.setStoryText("It's dusty. An old car lies untouched. It probably doesn't run anymore. Look around for tools");
         garage.setStoryTextRepeat("Keep looking around for tools");
         garage.addChoice(new Choice("1. Check the Tool Chest",new Outcome("You find an old wrench in one of the drawers.Maybe you can use it to break or open something?","gainItem",wrench,"return")));

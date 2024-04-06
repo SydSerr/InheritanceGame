@@ -6,7 +6,6 @@ public class Choice {
     //There's multiple outcomes. Via an if statement, we can decide which outcome is correct for this scenario.
     private ArrayList<Outcome> outcomes = new ArrayList<>();
 
-
     public Choice(String choiceDescription, Outcome outcome) {
         this.choiceDescription = choiceDescription;
         this.outcomes.add(outcome);
@@ -31,7 +30,6 @@ public class Choice {
         outcomes.add(outcome3);
         outcomes.add(outcome4);
     }
-
 
     public String getChoiceDescription() {
         return choiceDescription;
