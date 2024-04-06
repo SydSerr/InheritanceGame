@@ -41,7 +41,6 @@ public class Scene {
     //It decides this based on what the capabilities are.
     //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
     public Scene choice(int userChoice){
-        boolean validChoice = false;
 
         //System.out.println(Main.capabilities);
         //Cycle through all choices to check if what the user typed matches an option
@@ -60,7 +59,8 @@ public class Scene {
                     //Cycle through all outcomes
                     for (int k = 0; k < pickedChoice.getOutcomes().size(); k++) {
                         //Cycle through all requirements for every outcome
-                        for (int l = 0; l < pickedChoice.getOutcomes().get(k).getRequirements().size(); l++) {
+                        int requirementsCounter = 0;
+                        for (int l = 0; l < pickedChoice.getOutcome(k).getRequirements().size(); l++) {
                             //This one's a bit of a doozy in terms of readability
                             //It means that we look at the pickedChoice, then look at the first outcome (k) and it's requirement (l).
                             //Then we cycle through the requirements of the first outcome, by using the for loop for l
@@ -68,8 +68,13 @@ public class Scene {
                             //With every one of these cycles, we compare the requirement from the requirements from the outcome from the choice.
                             //We compare this requirement to the current capability.
                             if (Objects.equals(pickedChoice.getOutcome(k).getRequirements().get(l), Main.capabilities.get(j))) {
-                                pickedChoiceOutcome = pickedChoice.getOutcome(k);
+                                //Need to make sure all requirements are met. So, we need to confirm that l,
+                                requirementsCounter++;
                             }
+                        }
+                        //This means all requirements have been accounted for.
+                        if (requirementsCounter == pickedChoice.getOutcome(k).getRequirements().size()){
+                            pickedChoiceOutcome = pickedChoice.getOutcome(k);
                         }
                     }
                 }
@@ -101,10 +106,9 @@ public class Scene {
                 }
             }
         }
-            //if user number picked isn't a choice number (validChoice): shows error message and prompts user to continue to try again
-                System.out.println("Not a Valid Option! Continue to retry!");
-                waitForEnter();
-
+        //if user number picked isn't a choice number (validChoice): shows error message and prompts user to continue to try again
+        System.out.println("Not a Valid Option! Continue to retry!");
+        waitForEnter();
         return this;
 
     }
