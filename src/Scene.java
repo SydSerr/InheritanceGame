@@ -60,25 +60,25 @@ public class Scene {
                 //Cycle through all outcomes
                 pickedChoice.getOutcomes().forEach(outcome -> {
                     //IDE demands this is atomic because it is in a lambda, and it ensures thread safety as it runs
-                    AtomicInteger requirementsCounter = new AtomicInteger();
+                    AtomicInteger requirementsCounter = new AtomicInteger(0);
                     //Cycle through all requirements for every outcome
                     outcome.getRequirements().forEach(requirement -> {
                         //Cycle through all capabilities
                         Main.capabilities.forEach(capability -> {
+                            //Need to make sure all requirements are met. So, this if statement does that by going through all capabilities, and adding to the counter everytime the capability is met.
                             if (Objects.equals(requirement, capability)) {
-                                //Need to make sure all requirements are met. So, we need to confirm that l,
                                 requirementsCounter.getAndIncrement();
                             }
                         });
                     });
                     if (requirementsCounter.get() >= outcome.getRequirements().size()) {
-                        System.out.println("requirements met!!" + outcome.getDescription());
+                        //System.out.println("requirements met!!" + outcome.getDescription());
                         pickedChoiceOutcome.set(outcome);
                     }
                 });
 
                 System.out.println(pickedChoiceOutcome.get().getDescription());
-                System.out.println(Main.capabilities);
+                //System.out.println(Main.capabilities);
                 waitForEnter();
 
 

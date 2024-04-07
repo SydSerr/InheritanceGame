@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+
 //tool class that inherits from item
 public class Tool extends Item {
     //Tools have an arraylist of strings associated with them called uses.
@@ -15,5 +17,6 @@ public class Tool extends Item {
     @Override
     public void gain(){
         Main.capabilities.addAll(uses);
+        clearDuplicates();
     }
 }
