@@ -40,22 +40,24 @@ public class Scene {
         }
     }
 
-    //Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.
-    //It decides this based on what the capabilities are.
-    //It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities
+    /* Each Scene has multiple choices, and each choice can have multiple outcomes. This method, choice, outputs a scene to go to after a choice is picked.
+    It decides this based on what the capabilities are.
+    It can also do other things, like say "this.setRead = true;" which makes the game aware to do repeatText, and add items to the inventory and therefore to the capabilities */
     public Scene choice(int userChoice) {
 
-        //Cycle through all choices to check if what the user typed matches an option
-        //Get current choice of cycle, call this pickedChoice
-        for (Choice pickedChoice : choices) { //Cycle through all of choices
-            //However, pickedChoice doesn't really make sense as "picked" if it's not picked. This if statement makes sure it is picked.
+        /* Cycle through all choices to check if what the user typed matches an option
+        Get current choice of cycle, call this pickedChoice */
+        for (Choice pickedChoice : choices) {
+
+            //This if statement makes sure it is picked.
             if (userChoice == Character.getNumericValue(pickedChoice.getChoiceDescription().charAt(0))) {
-                //If it does match, get the outcome and do the appropriate thing, like giving an item.
-                //However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.
-                //So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilites, it happens.
-                //However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.
-                //Additionally, this default has to be atomic as we change it off of getOutcome(0) inside a lambda expression if we recognize the outcome has all requirements met
                 AtomicReference<Outcome> pickedChoiceOutcome = new AtomicReference<>(pickedChoice.getOutcome(0));
+
+                /* If it does match, get the outcome and do the appropriate thing, like giving an item.
+                However, to get the outcome, we must check what the player can do. In a scenario with a locked door, the player will not be able to pass unless the capabilities array says it can open this door.
+                So, we will cycle through the capabilities array, and then compare that to the getOutcome class. If the outcome requirement string matches our capabilities, it happens.
+                However, if the outcome requirement string doesn't match a capability, then we default to outcome index of 0.
+                Additionally, this default has to be atomic as we change it off of getOutcome(0) inside a lambda expression if we recognize the outcome has all requirements met */
 
                 //Cycle through all outcomes
                 pickedChoice.getOutcomes().forEach(outcome -> {
@@ -72,15 +74,12 @@ public class Scene {
                         });
                     });
                     if (requirementsCounter.get() >= outcome.getRequirements().size()) {
-                        //System.out.println("requirements met!!" + outcome.getDescription());
                         pickedChoiceOutcome.set(outcome);
                     }
                 });
 
                 System.out.println(pickedChoiceOutcome.get().getDescription());
-                //System.out.println(Main.capabilities);
                 waitForEnter();
-
 
                 switch (pickedChoiceOutcome.get().getEvent()) {
 
@@ -137,3 +136,4 @@ public class Scene {
 
     }
 }
+

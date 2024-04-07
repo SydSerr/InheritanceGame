@@ -27,7 +27,7 @@ public class Main {
         crowbar.addUse("smash");
         crowbar.addUse("pry");
 
-        //First room
+        //First room, opening scene
         System.out.println("Tip: Drag up on the console to view more text!");
         strangeRoom1.setStoryText("You wake up in a strange room in an unfamiliar house… There’s a locked door, dresser and a desk to your right. Maybe there’s something useful around.");
         strangeRoom1.setStoryTextRepeat("You’re still in the room. Maybe there’s something useful around. ");
@@ -47,7 +47,7 @@ public class Main {
         investigation.addNextScene(garage);
         investigation.addChoice(new Choice("5. Check window", new Outcome("The window could probably break if you had something to hit it with.", "return"), new Outcome("You smash open the window with a tool, but it's too small to fit through. You need to find another way out.", "return", "smash")));
 
-        //kitchen scene
+        //kitchen scene w/ choices and outcomes
         kitchen.setStoryText("The kitchen's a mess. Maybe there's something in this mess..");
         kitchen.setStoryTextRepeat("Keep looking around the kitchen?");
         kitchen.addChoice(new Choice("1. Check the fridge", new Outcome("There's nothing but a few empty containers...", "return")));
@@ -55,7 +55,7 @@ public class Main {
         kitchen.addChoice(new Choice("3. Leave kitchen", new Outcome("You leave the kitchen.", "nextScene1")));
         kitchen.addNextScene(investigation);
 
-        //garage scene
+        //garage scene w/ choices and outcomes
         garage.setStoryText("It's dusty. An old car lies untouched. It probably doesn't run anymore. There could be useful tools laying around.");
         garage.setStoryTextRepeat("Keep looking around the garage?");
         garage.addChoice(new Choice("1. Check the metal chest", new Outcome("You find an old adjustable wrench in one of the drawers. Versatile. You pocket it.", "gainItem", wrench)));

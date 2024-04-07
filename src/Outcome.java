@@ -5,14 +5,14 @@ public class Outcome {
     private String description;
 
     //Can be return, gainItem, nextScene, or other stuff. Used on the backend; the user won't see this.
-    //private ArrayList<String> events = new ArrayList<>();
+
     private String event;
     private Item gainedItem;
     private Item usedItem;
     private ArrayList<String> requirements = new ArrayList<>();
 
 
-    //Overloaded constructors for different types of outcomes: some with requirements, some with gaineditems, some both
+    //Overloaded constructors for different types of outcomes: some with requirements, some with gainedItems, some both
     public Outcome(String description, String event, String requirement) {
         this.description = description;
         this.event = event;
@@ -54,15 +54,12 @@ public class Outcome {
     public void setRequirements(ArrayList<String> requirements) {
         this.requirements = requirements;
     }
-
     public Item getGainedItem() {
         return gainedItem;
     }
-
     public void setGainedItem(Item gainedItem) {
         this.gainedItem = gainedItem;
     }
-
     public Item getUsedItem() {
         return usedItem;
     }
